@@ -9,7 +9,7 @@ const router = express.Router();
 // 创建账号接口
 router.post('/api/login/createAccount',(req,res) => {
     // 这里的req.body能够使用就在index.js中引入了const bodyParser = require('body-parser')
-    let newAccount = new models.Login({
+    let newAccount = new models.Login({ //创建Entity
         id : req.body.id,
         region : req.body.region,
         describ : req.body.describ,
@@ -20,6 +20,8 @@ router.post('/api/login/createAccount',(req,res) => {
         date1str : req.body.date1str,
         date2str : req.body.date2str,
         resource : req.body.resource
+    },{
+        versionKey: false //不要那个 _v 属性
     });
     // 保存数据newAccount数据进mongoDB
     newAccount.save((err,data) => {
@@ -50,6 +52,28 @@ router.post('/api/login/deleteAccount',(req,res) => {
         } else {
             console.log('d , remove success. ID: ' + ida);
             res.send('deleteAccount successed');
+        }
+    });
+});
+
+// 更新账号接口
+router.post('/api/login/updateAccount',(req,res) => {
+    let ida = req.body;
+    models.Login.update({"id":ida.id},{
+        "region":ida.region,
+        "describ":ida.describ,
+        "isOnline":ida.isOnline,
+        "code":ida.code,
+        "date1":ida.date1,
+        "date2":ida.date2,
+        "date1str":ida.date1str,
+        "date2str":ida.date2str,
+        "resource":ida.resource},(err) => {
+        if (err) {
+            console.log('d , update occur a error:', err);
+        } else {
+            console.log('d , update success.');
+            res.send('updateAccount successed');
         }
     });
 });
