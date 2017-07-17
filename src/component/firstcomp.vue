@@ -215,7 +215,7 @@
         this.codediv = true;
       },
       getjson(){
-        this.$http.get('/api/login/getAccount')
+        this.$http.get('http://localhost:8088/api/login/getAccount')
           .then((response) => {
             // 响应成功回调
             this.tableData = response.body;
@@ -238,7 +238,7 @@
             this.fixdiv = false;
             let paramss = this.tableData[x];
             // 创建一个对象
-            this.postjson('/api/login/updateAccount', paramss);
+            this.postjson('http://localhost:8088/api/login/updateAccount', paramss);
         } else {console.log('error submit!!');return false;}
         });
       },
@@ -256,7 +256,7 @@
               date1: that.form.date1 , date2: that.form.date2}
 
             // 创建一个对象
-            this.postjson('/api/login/createAccount', params);
+            this.postjson('http://localhost:8088/api/login/createAccount', params);
             this.addcannel();
           } else {console.log('error submit!!');return false;}
         });
@@ -267,7 +267,7 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.postjson('/api/login/deleteAccount', this.tableData[x]);
+          this.postjson('http://localhost:8088/api/login/deleteAccount', this.tableData[x]);
           this.$message({type: 'success',message: '删除成功!'});
         }).catch(() => {
           this.$message({type: 'info',message: '已取消删除'});          
@@ -279,7 +279,7 @@
         }else{
           this.tableData[x].isOnline = "已上线"
         };
-        this.postjson('/api/login/updateAccount', this.tableData[x]);
+        this.postjson('http://localhost:8088/api/login/updateAccount', this.tableData[x]);
       },
       dateChange1(val) {
         this.tableData[this.i].date1str = val;
