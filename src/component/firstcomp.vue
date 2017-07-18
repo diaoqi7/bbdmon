@@ -304,7 +304,7 @@
     z-index: 5;
   }
   .codetext textarea{
-    line-height: 14px;
+    line-height: 15.4px;
     background-color: #f6f6f6;
     font-family: "Source Code Pro",Consolas,Menlo,Monaco,"Courier New",monospace
   }
